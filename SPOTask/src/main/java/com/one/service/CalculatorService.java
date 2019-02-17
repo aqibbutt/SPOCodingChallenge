@@ -66,11 +66,11 @@ public class CalculatorService {
         alotSeniors = 1;
         alotJuniors = 0;
       }
-      else if (room % noOfSeniors > 1 && room % noOfSeniors < 7) {
+      else if (room % noOfSeniors > percentageCalculation(10, noOfSeniors) && room % noOfSeniors < percentageCalculation(70, noOfSeniors)) {
         alotSeniors = room / noOfSeniors;
         alotJuniors = 1;
       }
-      else if (room % noOfSeniors <= 1) {
+      else if (room % noOfSeniors <= percentageCalculation(10, noOfSeniors)) {
         alotSeniors = (room / noOfSeniors) - 1;
         alotJuniors = 2;
       }
@@ -88,6 +88,10 @@ public class CalculatorService {
     }
     return list;
 
+  }
+
+  public int percentageCalculation(int percent, int noOfSeniors) {
+    return (percent * noOfSeniors) / 100;
   }
 
   public CalculatorService() {
