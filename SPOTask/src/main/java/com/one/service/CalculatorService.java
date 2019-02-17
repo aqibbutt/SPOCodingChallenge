@@ -15,6 +15,14 @@ public class CalculatorService {
 
   public List<Employee> optimalSolution(WorkflowStructure structure) {
 
+    if (structure.getRooms()
+        .size() >= 100)
+      return null;
+    for (int room : structure.getRooms()) {
+      if (room > 100)
+        return null;
+    }
+
     List<Employee> list = new ArrayList<Employee>();
     int noOfSeniors = structure.getSenior();
     int noOfJuniors = structure.getJunior();
@@ -31,6 +39,52 @@ public class CalculatorService {
       int noOfJuniorAlloted = getOptimalNoOfJuniors(noOfJuniors, noOfSeniorAlloted, room);
       list.add(new Employee(noOfSeniorAlloted, noOfJuniorAlloted));
 
+    }
+    return list;
+
+  }
+
+  public List<Employee> optimalSPOSolution(WorkflowStructure structure) {
+
+    if (structure.getRooms()
+        .size() >= 100)
+      return null;
+    for (int room : structure.getRooms()) {
+      if (room > 100)
+        return null;
+    }
+
+    List<Employee> list = new ArrayList<Employee>();
+
+    int noOfSeniors = structure.getSenior();
+    int noOfJuniors = structure.getJunior();
+    int alotSeniors = 0;
+    int alotJuniors = 0;
+
+    for (int room : structure.getRooms()) {
+      if (room / noOfSeniors == 0) {
+        alotSeniors = 1;
+        alotJuniors = 0;
+      }
+      else if (room % noOfSeniors > 1 && room % noOfSeniors < 7) {
+        alotSeniors = room / noOfSeniors;
+        alotJuniors = 1;
+      }
+      else if (room % noOfSeniors <= 1) {
+        alotSeniors = (room / noOfSeniors) - 1;
+        alotJuniors = 2;
+      }
+      else {
+        alotSeniors = (room / noOfSeniors) + 1;
+        alotJuniors = 0;
+      }
+
+      if (alotSeniors < noOfSeniors && alotJuniors < noOfJuniors) {
+        list.add(new Employee(alotSeniors, alotJuniors));
+      }
+      else {
+        System.out.println("Not enough resources");
+      }
     }
     return list;
 

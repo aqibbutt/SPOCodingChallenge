@@ -17,7 +17,7 @@ import com.one.model.WorkflowStructure;
 @SpringBootTest
 public class CalculationAPITest {
 
-  public final static String REQUEST_URI = "http://localhost:8080/solution";
+  public final static String REQUEST_URI = "http://localhost:8080/sposolution";
 
   @Test
   public void optimalSolutionTest() {

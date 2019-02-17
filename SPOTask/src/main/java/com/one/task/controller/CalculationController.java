@@ -17,6 +17,7 @@ public class CalculationController {
    *
    */
   private static final String GET_OPTIMAL_SOLUTION = "/solution";
+  private static final String GET_SPO_OPTIMAL_SOLUTION = "/sposolution";
   CalculatorService calculator = new CalculatorService();
 
   @PostMapping(GET_OPTIMAL_SOLUTION)
@@ -28,4 +29,12 @@ public class CalculationController {
     //    return emp;
   }
 
+  @PostMapping(GET_SPO_OPTIMAL_SOLUTION)
+  public List<Employee> getSPOOptimalSolution(@RequestBody WorkflowStructure emp) {
+
+    System.out.println(calculator.optimalSolution(emp)
+        .get(0));
+    return calculator.optimalSPOSolution(emp);
+    //    return emp;
+  }
 }
